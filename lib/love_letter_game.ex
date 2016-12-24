@@ -2,27 +2,46 @@ defmodule LoveLetter.Game do
 
   def play_game(player_count) do
     deck = LoveLetter.shuffle_deck
-    IO.puts play_turn(deck, player_count, %{})
+    play_turn(deck, player_count |> generate_state, 1)
   end
 
-  def play_turn(deck, player_count, carry) do
-    new_carry = for player <- 1..10 do
-      case LoveLetter.draw_card(deck) do
-        { card, deck } -> Map.put(carry, player, card)
-        :empty_deck -> carry
-      end
-    end
-
-    play_turn(deck, player_count, new_carry)
+  def generate_state(player_count) when player_count >= 2 do
+    Range.new(1, player_count)
+    |> Enum.reduce(%{}, fn(int, acc) -> acc = Map.put(acc, int, 0) end)
   end
 
-  def play_turn([], player_count, carry) do
-    Map.keys(carry)
-    |> Enum.reduce(0, fn (key, acc) ->
-      cond do
-        carry[key] >= carry[acc] -> key
-        :else -> acc
+  def play_turn([], scores, current_player) do
+    calculate_winner(scores) |> print_winner
+  end
+
+  def calculate_winner(scores) do
+    IO.puts "current scores"
+    IO.inspect scores
+    Map.keys(scores)
+    |> Enum.reduce(1, fn(key, acc) ->
+      case scores[key] > scores[acc] do
+        true -> key
+        false -> acc
       end
     end)
+  end
+
+  def print_winner(winning_player) do
+    IO.puts "Congratulations player: #{winning_player}!"
+  end
+
+  def play_turn(current_deck, scores, current_player) do
+    {drawn, new_deck} = current_deck |> LoveLetter.draw_card
+    current_card = scores[current_player]
+    IO.puts "Player: #{current_player} just drew card: #{drawn} with #{current_card} in their hand"
+    new_scores = %{ scores | current_player => LoveLetter.Player.make_decision(drawn, current_card)}
+    play_turn(new_deck, new_scores, next_player(current_player, scores))
+  end
+
+  def next_player(current_player, scores) do
+    case Map.has_key?(scores, current_player + 1) do
+      true -> current_player + 1
+      false -> 1
+    end
   end
 end
