@@ -1,4 +1,5 @@
 defmodule LoveLetter.Game do
+  alias LoveLetter.Player
 
   def play_game(player_count) do
     deck = LoveLetter.shuffle_deck
@@ -34,7 +35,7 @@ defmodule LoveLetter.Game do
     {drawn, new_deck} = current_deck |> LoveLetter.draw_card
     current_card = scores[current_player]
     IO.puts "Player: #{current_player} just drew card: #{drawn} with #{current_card} in their hand"
-    new_scores = %{ scores | current_player => LoveLetter.Player.make_decision(drawn, current_card)}
+    new_scores = %{ scores | current_player => Player.make_decision(drawn, current_card)}
     play_turn(new_deck, new_scores, next_player(current_player, scores))
   end
 
