@@ -7,11 +7,7 @@ defmodule LoveLetter.Game do
 
   def generate_state(player_count) when player_count >= 2 do
     Range.new(1, player_count)
-    |> Enum.reduce(%{}, fn(int, acc) -> acc = Map.put(acc, int, 0) end)
-  end
-
-  def play_turn([], scores, current_player) do
-    calculate_winner(scores) |> print_winner
+    |> Enum.reduce(%{}, fn(int, acc) -> Map.put(acc, int, 0) end)
   end
 
   def calculate_winner(scores) do
@@ -28,6 +24,10 @@ defmodule LoveLetter.Game do
 
   def print_winner(winning_player) do
     IO.puts "Congratulations player: #{winning_player}!"
+  end
+
+  def play_turn([], scores, _) do
+    calculate_winner(scores) |> print_winner
   end
 
   def play_turn(current_deck, scores, current_player) do
