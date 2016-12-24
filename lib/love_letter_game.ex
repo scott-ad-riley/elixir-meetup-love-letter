@@ -34,7 +34,7 @@ defmodule LoveLetter.Game do
   def play_turn(current_deck, scores, current_player) do
     {drawn, new_deck} = current_deck |> LoveLetter.draw_card
     current_card = scores[current_player]
-    IO.puts "Player: #{current_player} just drew card: #{drawn} with #{current_card} in their hand"
+    IO.puts "\nPlayer: #{current_player} pick a card:"
     new_scores = %{ scores | current_player => Player.make_decision(drawn, current_card)}
     play_turn(new_deck, new_scores, next_player(current_player, scores))
   end
