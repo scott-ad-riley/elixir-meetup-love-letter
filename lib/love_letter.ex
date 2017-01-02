@@ -8,8 +8,7 @@ defmodule LoveLetter do
 
   def draw_card([]), do: :empty_deck
 
-  def draw_card(deck) do
-    [head | tail] = deck
+  def draw_card([head | tail]) do
     {head, tail}
   end
 end
