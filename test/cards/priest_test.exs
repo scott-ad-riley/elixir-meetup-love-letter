@@ -8,4 +8,8 @@ defmodule LoveLetterCardPriestTest do
     assert result == scores
   end
 
+  test "requires a target" do
+    assert LoveLetter.Card.requirements(2) == {:target}
+  end
+
 end

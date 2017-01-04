@@ -21,4 +21,9 @@ defmodule LoveLetterCardBaronTest do
     result = LoveLetter.Card.Baron.run(scores, choice)
     assert result == %{1 => 2, 2 => 2, 3 => 7}
   end
+
+  test "requires a current player and a target" do
+    assert LoveLetter.Card.requirements(3) == {:current, :target}
+  end
+
 end

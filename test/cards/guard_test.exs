@@ -14,4 +14,8 @@ defmodule LoveLetterCardGuardTest do
     result = LoveLetter.Card.Guard.run(scores, choice)
     assert result == %{1 => 2, 2 => 5, 3 => 7}
   end
+
+  test "requires a target and a guess" do
+    assert LoveLetter.Card.requirements(1) == {:target, :guess}
+  end
 end

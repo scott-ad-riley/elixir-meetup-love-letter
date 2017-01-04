@@ -7,4 +7,6 @@ defmodule LoveLetter.Card.Prince do
     %{scores | target => new_card, :deck => new_deck}
   end
 
+  def requirements, do: {:target}
+
 end

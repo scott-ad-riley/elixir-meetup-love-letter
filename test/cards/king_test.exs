@@ -7,4 +7,9 @@ defmodule LoveLetterCardKingTest do
     result = LoveLetter.Card.King.run(scores, choice)
     assert result == %{1 => 7, 2 => 5, 3 => 2}
   end
+
+  test "requires a current player and a target" do
+    assert LoveLetter.Card.requirements(6) == {:current, :target}
+  end
+
 end

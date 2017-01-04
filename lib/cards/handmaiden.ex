@@ -5,4 +5,6 @@ defmodule LoveLetter.Card.Handmaiden do
     Map.put(scores, :immune, [current | immunities])
   end
 
+  def requirements, do: {:current}
+
 end

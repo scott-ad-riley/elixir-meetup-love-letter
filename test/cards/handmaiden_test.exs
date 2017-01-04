@@ -14,4 +14,9 @@ defmodule LoveLetterCardHandmaidenTest do
     result = LoveLetter.Card.Handmaiden.run(scores, choice)
     assert result == %{1 => 2, 2 => 5, 3 => 7, :immune => [1, 2]}
   end
+
+  test "requires a current player" do
+    assert LoveLetter.Card.requirements(4) == {:current}
+  end
+
 end

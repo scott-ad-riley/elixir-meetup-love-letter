@@ -6,4 +6,6 @@ defmodule LoveLetter.Card.King do
     %{ scores | current => target_card, target => current_card }
   end
 
+  def requirements, do: {:current, :target}
+
 end

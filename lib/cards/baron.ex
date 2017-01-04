@@ -10,4 +10,6 @@ defmodule LoveLetter.Card.Baron do
     end
   end
 
+  def requirements, do: {:current, :target}
+
 end

@@ -6,4 +6,6 @@ defmodule LoveLetter.Card.Priest do
     scores
   end
 
+  def requirements, do: {:target}
+
 end

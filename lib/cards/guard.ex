@@ -8,4 +8,6 @@ defmodule LoveLetter.Card.Guard do
     end
   end
 
+  def requirements, do: {:target, :guess}
+
 end
